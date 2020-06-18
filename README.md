@@ -5,7 +5,6 @@ Dirty made Steam 2FA Client for Linux/Windows (should work in MacOS as well) in 
 ## screenshots
 ![enter image description here](https://i.imgur.com/7BdQDvm.png)
 ![enter image description here](https://i.imgur.com/1iww0LE.png)
-![enter image description here](https://i.imgur.com/AX9sRCo.png)
 ![enter image description here](https://i.imgur.com/56Cz4bC.png)
 ![enter image description here](https://i.imgur.com/lhikvMw.png)
 
