@@ -12,12 +12,12 @@ Dirty made Steam 2FA Client for Linux/Windows (should work in MacOS as well) in 
 
  1. package it yourself with electron-packager using the source code or
     get the release for your platform
- 2. [download the latest release for your platform (windows/linux)](https://github.com/srg-n/electron-steam-2fa/releases) 
- 3. populate the account.json with your info, if you don't know how to  
+ [download the latest release for your platform (windows/linux)](https://github.com/srg-n/electron-steam-2fa/releases) 
+ 2. populate the account.json with your info, if you don't know how to  
     get sharedSecret and identitySecret; google them
- 4. take a sip of your soy milk
- 5. launch steam-2fa-gui (.exe if your platform is windows)
- 6. congratulations!!
+ 3. take a sip of your soy milk
+ 4. launch steam-2fa-gui (.exe if your platform is windows)
+ 5. congratulations!!
 
 ## known bugs
 
