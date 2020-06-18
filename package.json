@@ -8,7 +8,7 @@
     "start": "electron ."
   },
   "author": "sergun <sergun6996@gmail.com>",
-  "license": "MIT",
+  "license": "GNU",
   "dependencies": {
     "convict": "^6.0.0",
     "electron": "^9.0.4",
