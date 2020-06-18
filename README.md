@@ -17,7 +17,7 @@ Dirty made Steam 2FA Client for Linux/Windows (should work in MacOS as well) in 
     get sharedSecret and identitySecret; google them
  4. take a sip of your soy milk
  5. launch steam-2fa-gui (.exe if your platform is windows)
- 6. congrulations!!
+ 6. congratulations!!
 
 ## known bugs
 
