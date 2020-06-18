@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/darkly/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Bo21yfmmZuXwcN/9vKrA5jPUMhr7znVBBeLxT9MA4r2BchhusfJ6+n8TLGUcRAtL" crossorigin="anonymous">
+
+    <script>
+        const ipc = require('electron').ipcRenderer;
+        function confirm2FA(id) {
+            console.log('accept ' + id);
+            ipc.send('aSynMessage', { action: 'confirm2FA', data: id });
+        };
+
+        function cancel2FA(id) {
+            console.log('cancel id ' + id);
+            ipc.send('aSynMessage', { action: 'cancel2FA', data: id });
+        };
+
+        ipc.on('confObjectUpdate', (event, args) => {
+            if (args.action === 'confirmed') {
+                let confirmationDiv = document.querySelector('#confStatus' + args.data);
+                confirmationDiv.innerHTML =
+                    `<div class="alert alert-success" role="alert">Accepted</div>`;
+            } else if (args.action === 'cancelled') {
+                let confirmationDiv = document.querySelector('#confStatus' + args.data);
+                confirmationDiv.innerHTML =
+                    `<div class="alert alert-danger" role="alert">Cancelled</div>`;
+            } else if (args.action === 'cancelledAll') {
+                let confirmationsDiv = document.querySelector('#confirmationList');
+                confirmationsDiv.innerHTML = `<div class="alert alert-danger" role="alert">All confirmations are cancelled</div>`;
+            } else if (args.action === 'confirmedAll') {
+                let confirmationsDiv = document.querySelector('#confirmationList');
+                confirmationsDiv.innerHTML = `<div class="alert alert-success" role="alert">All confirmations are accepted</div>`;
+            }
+        });
+
+    </script>
+    <title>XPlatform Steam 2FA - Made by sergun</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- error modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLongTitle">
+                            <div id="modalTitle">...</div>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalText">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <h1>Hello World!</h1>
+    We are using node
+    <script>document.write(process.versions.node)</script>,
+    Chrome
+    <script>document.write(process.versions.chrome)</script>,
+    and Electron
+    <script>document.write(process.versions.electron)</script>.
+
+    <input type="button" id="syncBtn" value="Hello Sync"> 
+    <div id="reply"></div>
+    -->
+        <h1>Confirmations</h1>
+        <hr>
+        <div id="confirmations">
+            <div class="list-group" id="confirmationList">
+                <center>No data</center>
+            </div>
+        </div>
+        <hr>
+        <div id="refreshText">
+            <div class="alert alert-danger" role="alert">
+                <strong>Please wait</strong> Some features may be unavailable while logging into Steam.
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary btn-lg btn-block" id="getConfirmations">Refresh</button>
+        <button type="button" class="btn btn-outline-danger btn-lg btn-block" id="confirmAll">Confirm all</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg btn-block" id="cancelAll">Cancel all</button>
+        <button type="button" class="btn btn-outline-light btn-lg btn-block" id="get2faCode">Get a 2FA Code</button>
+        <button type="button" class="btn btn-outline-info btn-lg btn-block" id="initialize">Reinitialize</button>
+
+
+
+        <hr>
+        <footer id="footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>made by <a href="#"
+                            onclick="ipc.send('aSynMessage', { action: 'openLink', data: 't.me/srg_n' });">sergun</a> <small>v0.0.1</small>
+                    </p>
+                    <ul class="list-unstyled">
+                        <li><a href="#"
+                                onclick="ipc.send('aSynMessage', { action: 'openLink', data: 'github.com/srg-n' });">GitHub</a>
+                        </li>
+                        <li><a href="#"
+                                onclick="ipc.send('aSynMessage', { action: 'openLink', data: 'steamcommunity.com/profiles/76561198086096507' });">Steam</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>if (window.module) module = window.module;</script>
+    <script>
+        require('./renderer.js');
+    </script>
+</body>
+
+</html>
