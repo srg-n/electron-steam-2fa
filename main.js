@@ -31,7 +31,7 @@ function getConfirmations() {
         key_conf = SteamTotp.getConfirmationKey(identitySecret, time_conf, 'conf');
         community.getConfirmations(time_conf, key_conf, function (err, confirmations) {
 
-            if (err) { logger.error(err); return; }
+            if (err) { throw err; return; }
             confirmations.forEach(confirmation => {
                 confirms['conf' + confirmation.id] = {};
                 confirms['conf' + confirmation.id] = confirmation;
