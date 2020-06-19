@@ -31,25 +31,13 @@ function getConfirmations() {
         key_conf = SteamTotp.getConfirmationKey(identitySecret, time_conf, 'conf');
         community.getConfirmations(time_conf, key_conf, function (err, confirmations) {
 
-            if (err) { throw err; return; }
+            if (err) { throw err; }
             confirmations.forEach(confirmation => {
                 confirms['conf' + confirmation.id] = {};
                 confirms['conf' + confirmation.id] = confirmation;
             });
             console.log(confirms);
             resolve(confirmations);
-
-            /*
-            time_details = Math.floor(Date.now() / 1000);
-            key_details = SteamTotp.getConfirmationKey("identitySecret, time_details, 'details');
- 
-            confirmations.forEach(function (confirmation) {
-                confirmation.getOfferID(time_details, key_details, function (err, offerID) {
-                    if (err) { logger.error(err); return; }
-                    console.log(offerID);
-                });
-            });
-            */
         });
     })
 }
@@ -109,13 +97,12 @@ ipc.on('aSynMessage', async (event, args) => {
             let confKey = SteamTotp.getConfirmationKey(identitySecret, time, "conf");
             let allowKey = SteamTotp.getConfirmationKey(identitySecret, time, act);
             community.getConfirmations(time, confKey, function (err, confs) {
-                if (err) {
-                    callback(err);
+                if (confs.length == 0) {
+                    event.sender.send('error', "We don't have any confirmation to act on.");
                     return;
                 }
-
-                if (confs.length == 0) {
-                    callback(null, []);
+                if (err) {
+                    event.sender.send('error', err.toString());
                     return;
                 }
 
