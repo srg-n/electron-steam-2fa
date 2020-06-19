@@ -1,6 +1,6 @@
 {
   "name": "steam-2fa-gui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -12,11 +12,7 @@
   "dependencies": {
     "convict": "^6.0.0",
     "electron": "^9.0.4",
-    "electron-rebuild": "^1.11.0",
     "steam-totp": "^2.1.1",
     "steamcommunity": "^3.41.4"
-  },
-  "devDependencies": {
-    "electron-packager": "^14.2.1"
   }
 }
