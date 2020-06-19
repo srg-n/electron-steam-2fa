@@ -17,6 +17,8 @@ Dirty made Steam 2FA Client for Linux/Windows (should work in MacOS as well) in 
  3. take a sip of your soy milk
  4. launch steam-2fa-gui (.exe if your platform is windows)
  5. congratulations!!
+ 
+ (you may need to use sudo sysctl kernel.unprivileged_userns_clone=1 on linux to run electron)
 
 ## known bugs
 
